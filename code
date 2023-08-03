@@ -1,0 +1,147 @@
+def play():   
+    import random
+    d=dict()
+    d1=dict() #row
+    d3=dict() #count
+    l=[]
+    c=0
+    n=int(input("\nenter number of players: "))
+    for i in range(1,n+1):
+        d["player"+str(i)]=[]
+        d3["count of player"+str(i)]=0
+    for k in list(d.keys()):
+        while len(d[k])<25:
+            if len(d[k])<1:
+                d[k].append(random.randint(1,25))
+            else:
+                j=random.randint(1,25)
+                if j not in d[k]:
+                    d[k].append(j)
+    for pg in list(d.keys()):
+        i=1
+        s=0
+        e=5
+        print()
+        print(pg+"  grid")   
+        while e<=25:
+                print()
+                l=d[pg][s:e]
+                while i<6:
+                    d1["r"+str(i)]=l
+                    break
+                i+=1
+                for x in l:
+                    if x>=10:
+                        print(x,end='   ')
+                    else:
+                        print(x,end='    ')
+                print()
+                s+=5
+                e+=5
+        continue
+    print("\ntime to play\n")
+    for j in range(1,n+1):
+        c=0
+        while d3["count of player"+str(j)]<5:
+            il=1
+            while il<=n:
+                print("player"+str(il)+"'s turn")
+                il+=1
+                num=int(input("\nenter a num :"))           
+                for pg in list(d.keys()):
+                    s=0
+                    e=5
+                    creation=True
+                    i=d[pg].index(num)
+                    d[pg].remove(num)
+                    d[pg].insert(i,"X")
+                    print()
+                    print(pg+"  grid")
+                    print('\n')
+                    print()
+                    while e<=25:
+                        l=d[pg][s:e]
+                        for x in l:
+                            if str(x).isalpha()==False:
+                                if x>=10:
+                                    print(x,end='   ')
+                                else:
+                                    print(x,end='    ')
+                            else:
+                                print(x,end="    ")
+                        print('\n')
+                        s+=5
+                        e+=5
+                    r1=d[pg][0:5]
+                    r2=d[pg][5:10]
+                    r3=d[pg][10:15]
+                    r4=d[pg][15:20]
+                    r5=d[pg][20:25]
+                    c1=[r1[0],r2[0],r3[0],r4[0],r5[0]]
+                    c2=[r1[1],r2[1],r3[1],r4[1],r5[1]]
+                    c3=[r1[2],r2[2],r3[2],r4[2],r5[2]]
+                    c4=[r1[3],r2[3],r3[3],r4[3],r5[3]]
+                    c5=[r1[4],r2[4],r4[4],r4[4],r5[4]]
+                    dg1=[r1[0],r2[1],r3[2],r4[3],r5[4]]
+                    dg2=[r1[4],r2[3],r3[2],r4[1],r5[0]]
+                    m=[r1,r2,r3,r4,r5,c1,c2,c3,c4,c5,dg1,dg2]
+                    if d3["count of "+str(pg)]!=m.count(["X"]*5):
+                        print("1 point for",pg,"\n")
+                        d3["count of "+str(pg)]+=1
+                    print(pg,"points : ",d3["count of "+str(pg)],'\n')
+                    if d3["count of "+pg]==5:
+                        print(pg,"wins\n")
+                        print("BINGO!\n")
+                        ask=input("Do you want to play again?\n\nType yes or no :")
+                        if ask=="yes":
+                            play()
+                        else:
+                            print("\nGame over")
+                            return "BINGO"
+def mainmenu():
+    print("WELCOME TO BINGO\n")
+    print("Press 1 to start the game : \n")
+    q=int(input("Press 2 to read the rules : "))
+    if q==2:
+        print("\nUser will be asked to enter the number of players\n")
+        print("Each player gets a 5 x 5 grid consisting of 1 to 25 numbers\n")
+        print("Every player will be given a turn to guess a number\n")
+        print("The number guessed will be striked out of each player's grid\n")
+        print("Upon striking numbers of an entire row or column or diagonal, player earns a point\n")
+        print("The player first to score five points will be declared the winner\n")
+        q1=input("\nShall we start?\n\nType yes or no")
+        if q1.lower()=="yes":
+            play()
+        else:
+            print("\nOkay!!!Maybe sometime later")
+    elif q==1:
+        play()
+    else:
+        print("\nInvalid input")
+mainmenu()
+
+                
+            
+            
+            
+            
+            
+            
+    
+            
+                
+                    
+
+                    
+                    
+                           
+                    
+                
+                        
+                        
+                    
+                    
+
+    
+        
+
